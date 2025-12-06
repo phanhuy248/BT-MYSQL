@@ -14,12 +14,12 @@ INNER JOIN `position`
 USING(position_id)
 WHERE position_name = 'Dev';
 -- 4 Viết lệnh để lấy ra danh sách các phòng ban có >3 nhân viên
-SELECT department_name,COUNT(department_id) SL
+SELECT department_name,COUNT(account_id) SL
 FROM `account`
-INNER JOIN department
+LEFT JOIN department
 USING(department_id)
 GROUP BY department_id
-HAVING SL > 0;
+HAVING SL > 3;
 -- 5 Viết lệnh để lấy ra danh sách câu hỏi được sử dụng trong đề thi nhiều nhất
 SELECT question_id,COUNT(*) SL
 FROM exam_question
@@ -28,13 +28,13 @@ HAVING SL = (SELECT max(SL) FROM (SELECT count(*) SL
 FROM exam_question
 GROUP BY question_id) TB);
 -- 6 Thông kê mỗi category Question được sử dụng trong bao nhiêu Question
-SELECT category_id,category_name,(category_id) SL
+SELECT category_id,category_name,count(question_id) SL
 FROM category_question
-INNER JOIN question
+LEFT JOIN question
 USING(category_id)
 GROUP BY category_id;
 -- 7 Thông kê mỗi Question được sử dụng trong bao nhiêu Exam
-SELECT question_id,content,COUNT(question_id) SL
+SELECT question_id,content,COUNT(exam_id) SL
 FROM exam_question
 INNER JOIN question
 USING(question_id)
@@ -48,9 +48,9 @@ GROUP BY question_id
 HAVING SL = (SELECT max(SL) FROM (SELECT count(*) SL FROM answer GROUP BY question_id) TB);
 
 -- 9 Thống kê số lượng account trong mỗi group
-SELECT group_id,group_name,count(group_id) SL
+SELECT group_id,group_name,count(account_id) SL
 FROM `group`
-INNER JOIN group_account
+LEFT JOIN group_account
 USING(group_id)
 GROUP BY group_id;
 -- 10 Tìm chức vụ có ít người nhất 
