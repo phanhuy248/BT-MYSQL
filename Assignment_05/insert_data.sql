@@ -47,7 +47,7 @@ INSERT INTO `group`(group_name,creator_id,create_date)
 INSERT INTO group_account(group_id,account_id,join_date)
 	VALUES
 			(1,1,'2025-12-12'),
-            (2,1,'2025-11-12'),
+            (2,2,'2025-11-12'),
             (3,3,'2025-10-12'),
             (4,4,'2025-09-12'),
             (5,5,'2025-12-05'),
